@@ -1,52 +1,46 @@
 import { NavLink } from "react-router-dom";
-import posterImg from "../../../assets/poster.png";
-
-const dotStyle = "w-2 h-2 rounded-full bg-slate-600/80 hover:bg-slate-400 cursor-pointer";
+import { useMovies } from "../../../hooks/useMovies";
+import { getTrending } from "../../../services/api";
 
 function DiscoverHero() {
+  /* Fetch trending movie data */
+  const query = useMovies("trending", getTrending);
+  if (!query.data) return null;
+  const movie = query.data[0];
+
   return (
-    <section className="relative w-full h-[420px] sm:h-[480px] rounded-2xl md:rounded-3xl
-     overflow-hidden border border-slate-800/60 mb-8">
-      {/* Background poster image */}
-      <img
-        className="w-full h-full object-cover object-center"
-        src={posterImg}
-        alt="Dune: Part Two"
-      />
+    <div className="px-2 sm:px-4">
+      <section className="relative w-full h-[500px] sm:h-[560px] md:h-[620px] rounded-2xl md:rounded-3xl overflow-hidden
+       border border-slate-800/60 mt-6 mb-10">
+        <img className="w-full h-full object-cover object-center"
+          src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
+          alt={movie.title}
+        />
 
-      {/* Gradient overlays */}
-      <div className="absolute inset-0 bg-gradient-to-r from-[#06070a] via-[#06070a]/80 to-transparent"></div>
-      <div className="absolute inset-0 bg-gradient-to-t from-[#06070a] via-transparent to-transparent opacity-90"></div>
+        {/* Gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#07080e] via-[#07080e]/60 to-transparent" />
 
-      {/* Hero Content */}
-      <div className="absolute inset-0 p-6 sm:p-10 flex flex-col justify-center items-start max-w-xl">
-        <span className="text-xs font-bold tracking-widest text-violet-400 uppercase mb-2">
-          TRENDING NOW
-        </span>
-        <h1 className="text-3xl sm:text-5xl font-extrabold text-white mb-3 tracking-wide">
-          Dune: Part Two
-        </h1>
-        <p className="text-sm text-slate-300 leading-relaxed mb-6 line-clamp-3">
-          Paul Atreides unites with Chani and the Fremen while seeking revenge
-          against the conspirators who destroyed his family.
-        </p>
+        {/* Hero Content */}
+        <div className="absolute inset-0 p-6 sm:p-12 md:p-16 flex flex-col justify-center items-start max-w-xl z-10">
+          <span className="text-xs font-bold tracking-widest text-violet-400 uppercase mb-2">
+            #1 TRENDING NOW
+          </span>
+          <h1 className="text-3xl sm:text-5xl font-extrabold text-white mb-3 tracking-wide leading-tight">
+            {movie.title}
+          </h1>
+          <p className="text-sm sm:text-base text-slate-300 leading-relaxed mb-6 line-clamp-3">
+            {movie.overview}
+          </p>
 
-        {/* Watch details button */}
-        <NavLink className="bg-violet-600 hover:bg-violet-700 text-white font-medium text-sm px-6 py-2.5 rounded-xl"
-          to="/movie/1"
-        >
-          Watch Details
-        </NavLink>
-
-        {/* Dots */}
-        <div className="flex items-center gap-2 mt-6">
-          <span className="w-6 h-2 rounded-full bg-violet-600"></span>
-          <span className={dotStyle}></span>
-          <span className={dotStyle}></span>
-          <span className={dotStyle}></span>
+          <NavLink className="bg-violet-600 hover:bg-violet-700 text-white font-medium text-sm px-6 py-3 rounded-xl
+           shadow-lg transition-colors"
+            to={`/movie/${movie.id}`}
+          >
+            Watch Details
+          </NavLink>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
   );
 }
 
