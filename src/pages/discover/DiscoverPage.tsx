@@ -1,11 +1,11 @@
 import DiscoverHero from "./components/DiscoverHero";
-import DiscoverTrending from "./components/DiscoverTrending";
+import DiscoverSections from "./components/DiscoverSections";
 
 function DiscoverPage() {
   return (
     <div>
       <DiscoverHero />
-      <DiscoverTrending />
+      <DiscoverSections />
     </div>
   );
 }
