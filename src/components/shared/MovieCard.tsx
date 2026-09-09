@@ -1,23 +1,20 @@
 import { Star, Heart } from "lucide-react";
-import posterFallback from "../../assets/poster.png";
 
 type MovieCardProps = {
   movie: {
     id: number;
     title: string;
-    poster_path?: string;
+    poster_path: string;
     vote_average?: number;
-    release_date?: string;
+    release_date: string;
   };
-}
+};
 
 function MovieCard({ movie }: MovieCardProps) {
-  const posterUrl = movie.poster_path
-    ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
-    : posterFallback;
+  const posterUrl = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
 
   const rating = movie.vote_average ? movie.vote_average.toFixed(1) : "0.0";
-  const year = movie.release_date ? movie.release_date.split("-")[0] : "—";
+  const year = movie.release_date.split("-")[0];
 
   return (
     <div className="group cursor-pointer flex flex-col w-full">
@@ -43,11 +40,10 @@ function MovieCard({ movie }: MovieCardProps) {
       </div>
 
       <div className="flex flex-col">
-        <h3 className="font-semibold text-xs sm:text-sm text-white truncate group-hover:text-violet-400 transition-colors">
+        <h3 className="font-semibold text-xs md:text-sm text-white truncate group-hover:text-violet-400 transition-colors">
           {movie.title}
         </h3>
-        <p className="text-xs text-slate-400 mt-0.5">
-          {year}</p>
+        <p className="text-xs text-slate-400 mt-0.5">{year}</p>
       </div>
     </div>
   );

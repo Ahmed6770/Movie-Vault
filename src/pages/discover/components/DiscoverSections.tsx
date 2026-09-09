@@ -28,7 +28,7 @@ function DiscoverSections() {
 
   /* Movie Rows Render */
   return (
-    <div className="flex flex-col gap-2">
+    <div className="px-4 md:px-8 flex flex-col gap-2">
       <MovieRow title="Trending Movies" movies={trendingQuery.data} />
       <MovieRow title="Popular Movies" movies={popularQuery.data} />
       <MovieRow title="Top Rated Movies" movies={topRatedQuery.data} />

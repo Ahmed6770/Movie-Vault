@@ -2,9 +2,9 @@ import MovieCard from "./MovieCard";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 
-interface MovieRowProps {
+type MovieRowProps = {
   title: string;
-  movies?: any;
+  movies: any;
 }
 
 function MovieRow({ title, movies }: MovieRowProps) {
@@ -12,7 +12,7 @@ function MovieRow({ title, movies }: MovieRowProps) {
     <section className="mb-10">
       {/* Header */}
       <div className="flex items-center justify-between mb-4">
-        <h2 className="text-lg sm:text-xl font-bold text-white">
+        <h2 className="text-lg md:text-xl font-bold text-white">
           {title}
         </h2>
         <button className="cursor-pointer text-xs font-semibold text-violet-400 hover:text-violet-300 transition-colors">
@@ -21,7 +21,8 @@ function MovieRow({ title, movies }: MovieRowProps) {
       </div>
 
       {/* Swiper Slider */}
-      <Swiper className="w-full"
+      <Swiper
+        className="w-full"
         spaceBetween={16}
         slidesPerView={2.3}
         breakpoints={{
