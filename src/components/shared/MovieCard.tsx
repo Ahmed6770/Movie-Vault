@@ -19,8 +19,7 @@ function MovieCard({ movie }: MovieCardProps) {
   return (
     <div className="group cursor-pointer flex flex-col w-full">
       <div className="relative aspect-[2/3] w-full rounded-xl overflow-hidden mb-2 bg-slate-900">
-        <img
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+        <img className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
           src={posterUrl}
           alt={movie.title}
           loading="lazy"
@@ -31,8 +30,7 @@ function MovieCard({ movie }: MovieCardProps) {
           <span>{rating}</span>
         </div>
 
-        <button
-          className="absolute top-2 right-2 p-1.5 rounded-md bg-black text-slate-300 hover:text-rose-500"
+        <button className="absolute top-2 right-2 p-1.5 rounded-md bg-black text-slate-300 hover:text-rose-500"
           title="Add to Favorites"
         >
           <Heart className="w-3.5 h-3.5" />
@@ -40,7 +38,7 @@ function MovieCard({ movie }: MovieCardProps) {
       </div>
 
       <div className="flex flex-col">
-        <h3 className="font-semibold text-xs md:text-sm text-white truncate group-hover:text-violet-400 transition-colors">
+        <h3 className="font-semibold text-xs md:text-sm text-white truncate group-hover:text-blue-500 transition-colors">
           {movie.title}
         </h3>
         <p className="text-xs text-slate-400 mt-0.5">{year}</p>

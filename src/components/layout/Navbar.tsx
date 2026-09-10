@@ -12,7 +12,7 @@ function Navbar() {
 
   const linkClass = ({ isActive }: { isActive: boolean }) =>
     `py-1 border-b-2 transition-colors ${ isActive
-        ? "text-[#703bf7] border-[#703bf7] font-semibold"
+        ? "text-blue-500 border-blue-500 font-semibold"
         : "text-slate-400 hover:text-slate-200 border-transparent"
     }`;
 
@@ -27,7 +27,7 @@ function Navbar() {
                 src={Logo} alt="Movie Vault Logo"
               />
               <span className="font-bold text-base md:text-lg text-slate-100">
-                MOVIE <span className="text-[#703bf7]">VAULT</span>
+                MOVIE <span className="text-blue-500">VAULT</span>
               </span>
             </NavLink>
 
@@ -44,15 +44,14 @@ function Navbar() {
           {/* Search bar */}
           <div className="relative flex-1 max-w-md mx-2 md:mx-6">
             <Search className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500" />
-            <input className="w-full bg-[#12131f] text-xs md:text-sm text-slate-300 placeholder-slate-500 pl-9 md:pl-10 pr-4 py-1.5
-                md:py-2 rounded-xl border border-slate-800 focus:outline-none focus:border-[#703bf7] transition-colors"
+            <input className="w-full bg-[#12131f] text-xs md:text-sm text-slate-300 placeholder-slate-500 pl-9 md:pl-10 pr-4 py-1.5 md:py-2 rounded-xl border border-slate-800 focus:outline-none focus:border-blue-500 transition-colors"
               type="text" placeholder="Search movies..."
             />
           </div>
 
           {/* Profile */}
           <div className="hidden md:flex items-center gap-2 text-sm text-slate-300 cursor-pointer">
-            <CircleUser className="w-7 h-7 text-[#703bf7]" />
+            <CircleUser className="w-7 h-7 text-blue-500" />
             <span className="font-medium text-slate-300">Ahmed</span>
             <ChevronDown className="w-4 h-4 text-slate-500" />
           </div>
@@ -66,7 +65,7 @@ function Navbar() {
             <NavLink className={({ isActive }) =>
               `flex flex-col items-center gap-1 transition-colors ${
                 isActive
-                  ? "text-[#703bf7]"
+                  ? "text-blue-500"
                   : "text-slate-400 hover:text-slate-200"
               }`}
               key={to} to={to}

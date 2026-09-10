@@ -5,7 +5,7 @@ import "swiper/css";
 type MovieRowProps = {
   title: string;
   movies: any;
-}
+};
 
 function MovieRow({ title, movies }: MovieRowProps) {
   return (
@@ -15,14 +15,13 @@ function MovieRow({ title, movies }: MovieRowProps) {
         <h2 className="text-lg md:text-xl font-bold text-white">
           {title}
         </h2>
-        <button className="cursor-pointer text-xs font-semibold text-violet-400 hover:text-violet-300 transition-colors">
+        <button className="cursor-pointer text-xs font-semibold text-blue-500 hover:text-blue-400 transition-colors">
           View All
         </button>
       </div>
 
       {/* Swiper Slider */}
-      <Swiper
-        className="w-full"
+      <Swiper className="w-full"
         spaceBetween={16}
         slidesPerView={2.3}
         breakpoints={{
