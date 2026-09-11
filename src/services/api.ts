@@ -5,6 +5,7 @@ export const api = axios.create({
   baseURL: "https://api.themoviedb.org/3",
   params: {
     api_key: import.meta.env.VITE_TMDB_API_KEY,
+    include_adult: false,
   },
 });
 
@@ -76,4 +77,14 @@ export async function getHorror() {
     params: { with_genres: 27 },
   });
   return response.data.results;
+}
+
+/* Fetch movie details */
+export async function getMovieDetails(id: string) {
+  const response = await api.get(`/movie/${id}`, {
+    params: {
+      append_to_response: "credits,videos,similar,watch/providers",
+    },
+  });
+  return response.data;
 }

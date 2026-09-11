@@ -1,5 +1,5 @@
 import { Star, Heart } from "lucide-react";
-
+import { Link } from "react-router-dom";
 type MovieCardProps = {
   movie: {
     id: number;
@@ -17,8 +17,10 @@ function MovieCard({ movie }: MovieCardProps) {
   const year = movie.release_date.split("-")[0];
 
   return (
-    <div className="group cursor-pointer flex flex-col w-full">
-      <div className="relative aspect-[2/3] w-full rounded-xl overflow-hidden mb-2 bg-slate-900">
+    <Link className="group cursor-pointer flex flex-col w-full"
+      to={`/movie/${movie.id}`}
+    >
+      <div className="relative aspect-[2/3] w-full rounded-xl overflow-hidden mb-2 bg-[#12131f]">
         <img className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
           src={posterUrl}
           alt={movie.title}
@@ -43,7 +45,7 @@ function MovieCard({ movie }: MovieCardProps) {
         </h3>
         <p className="text-xs text-slate-400 mt-0.5">{year}</p>
       </div>
-    </div>
+    </Link>
   );
 }
 
