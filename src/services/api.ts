@@ -88,3 +88,14 @@ export async function getMovieDetails(id: string) {
   });
   return response.data;
 }
+
+/* Fetch search */
+export async function searchMovies(text: string){
+  if (!text) return []; 
+  const response = await api.get("/search/movie", {
+    params: {
+      query: text
+    }
+  })
+  return response.data.results;
+}

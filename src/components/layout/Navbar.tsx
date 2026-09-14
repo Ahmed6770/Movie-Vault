@@ -1,8 +1,19 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { Search, CircleUser, ChevronDown, Home, Library } from "lucide-react";
 import Logo from "../../assets/logo.png";
+import { useState } from "react";
 
 function Navbar() {
+  const [searchValue, setSearchValue] = useState("")
+  const navigate = useNavigate()
+
+  function handleEnter(e: string) {
+    if (e === "Enter") {
+      navigate(`/search?query=${searchValue}`);
+      setSearchValue("")
+    }
+  }
+
   const navLinks = [
     { name: "Discover", to: "/discover", icon: Home },
     { name: "Search", to: "/search", icon: Search },
@@ -19,14 +30,12 @@ function Navbar() {
   return (
     <nav>
       <header className="w-full bg-[#090a10] border-b border-slate-800 text-white sticky top-0 z-40">
-        <div className="flex items-center justify-between px-4 md:px-8 py-3 gap-3 md:gap-8">
-          {/* Logo */}
-          <div className="flex items-center gap-6 md:gap-12">
-            <NavLink className="flex items-center gap-2.5" to="/">
-              <img className="h-7 md:h-8 w-auto object-contain"
-                src={Logo} alt="Movie Vault Logo"
-              />
-              <span className="font-bold text-base md:text-lg text-slate-100">
+        <div className="flex items-center justify-between px-6 py-3 gap-6">
+          {/* Logo & Links */}
+          <div className="flex items-center gap-8">
+            <NavLink to="/" className="flex items-center gap-2">
+              <img src={Logo} alt="Movie Vault" className="h-8 w-auto" />
+              <span className="font-bold text-lg text-slate-100">
                 MOVIE <span className="text-blue-500">VAULT</span>
               </span>
             </NavLink>
@@ -46,6 +55,9 @@ function Navbar() {
             <Search className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500" />
             <input className="w-full bg-[#12131f] text-xs md:text-sm text-slate-300 placeholder-slate-500 pl-9 md:pl-10 pr-4 py-1.5 md:py-2 rounded-xl border border-slate-800 focus:outline-none focus:border-blue-500 transition-colors"
               type="text" placeholder="Search movies..."
+              value={searchValue}
+              onChange={(e)=> setSearchValue(e.target.value)}
+              onKeyDown={(e)=> handleEnter(e.key)}
             />
           </div>
 
