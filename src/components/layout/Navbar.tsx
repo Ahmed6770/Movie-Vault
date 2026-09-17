@@ -1,5 +1,5 @@
 import { NavLink, useNavigate } from "react-router-dom";
-import { Search, CircleUser, ChevronDown, Home, Library } from "lucide-react";
+import { Search, CircleUser, ChevronDown, Home, Library, Film } from "lucide-react";
 import Logo from "../../assets/logo.png";
 import { useState } from "react";
 
@@ -16,6 +16,7 @@ function Navbar() {
 
   const navLinks = [
     { name: "Discover", to: "/discover", icon: Home },
+    { name: "Movies", to: "/movies", icon: Film },
     { name: "Search", to: "/search", icon: Search },
     { name: "My Library", to: "/library", icon: Library },
     { name: "Profile", to: "/profile", icon: CircleUser },
@@ -44,6 +45,9 @@ function Navbar() {
             <nav className="hidden md:flex items-center gap-6 text-sm font-medium">
               <NavLink to="/discover" className={linkClass}>
                 Discover
+              </NavLink>
+              <NavLink to="/movies" className={linkClass}>
+                Movies
               </NavLink>
               <NavLink to="/library" className={linkClass}>
                 My Library

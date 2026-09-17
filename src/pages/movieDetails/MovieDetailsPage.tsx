@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { getMovieDetails } from "../../services/api";
+import { getMovieDetails, getSimilarMovies } from "../../services/api";
 import { useMovies } from "../../hooks/useMovies";
 import MovieDetailsHero from "./components/MovieDetailsHero";
 import MovieDetailsInfo from "./components/MovieDetailsInfo";
@@ -13,7 +13,11 @@ function MovieDetailsPage() {
   const query = useMovies(`movieDetails-${id}`, () =>
     getMovieDetails(id || ""),
   );
+  const similar = useMovies(`similar-${id}`, () =>
+    getSimilarMovies(id || ""),
+  );
   const movie = query.data as any;
+  const similarMovies = (similar.data as any) || [];
 
   if (!movie) return null;
 
@@ -27,7 +31,7 @@ function MovieDetailsPage() {
       <MovieTrailer trailer={movie.videos?.results?.[0]?.key} />
       <MovieCast cast={movie.credits?.cast} />
       <WhereToWatch providers={providers} />
-      <SimilarMovies movies={movie.similar?.results} />
+      <SimilarMovies movies={similarMovies} />
     </div>
   );
 }

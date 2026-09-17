@@ -11,6 +11,10 @@ import {
   getAnimation,
   getSciFi,
   getHorror,
+  getDrama,
+  getRomance,
+  getThriller,
+  getAdventure,
 } from "../../../services/api";
 
 function DiscoverSections() {
@@ -25,22 +29,31 @@ function DiscoverSections() {
   const animationQuery = useMovies("animation", getAnimation);
   const sciFiQuery = useMovies("sciFi", getSciFi);
   const horrorQuery = useMovies("horror", getHorror);
+  const dramaQuery = useMovies("drama", getDrama);
+  const romanceQuery = useMovies("romance", getRomance);
+  const thrillerQuery = useMovies("thriller", getThriller);
+  const adventureQuery = useMovies("adventure", getAdventure);
 
   /* Movie Rows Render */
   return (
     <div className="px-4 md:px-8 flex flex-col gap-2">
-      <MovieRow title="Trending Movies" movies={trendingQuery.data} />
-      <MovieRow title="Popular Movies" movies={popularQuery.data} />
-      <MovieRow title="Top Rated Movies" movies={topRatedQuery.data} />
-      <MovieRow title="Now Playing in Theaters" movies={nowPlayingQuery.data} />
-      <MovieRow title="Upcoming Movies" movies={upcomingQuery.data} />
-      <MovieRow title="Action & Thrillers" movies={actionQuery.data} />
-      <MovieRow title="Comedy Hits" movies={comedyQuery.data} />
-      <MovieRow title="Animation & Family" movies={animationQuery.data} />
-      <MovieRow title="Sci-Fi & Fantasy" movies={sciFiQuery.data} />
-      <MovieRow title="Horror & Mystery" movies={horrorQuery.data} />
+      <MovieRow title="Trending Movies" movies={trendingQuery.data} to="/movies" />
+      <MovieRow title="Popular Movies" movies={popularQuery.data} to="/movies" />
+      <MovieRow title="Top Rated Movies" movies={topRatedQuery.data} to="/movies" />
+      <MovieRow title="Now Playing in Theaters" movies={nowPlayingQuery.data} to="/movies" />
+      <MovieRow title="Upcoming Movies" movies={upcomingQuery.data} to="/movies" />
+      <MovieRow title="Action & Thrillers" movies={actionQuery.data} to="/movies" />
+      <MovieRow title="Comedy Hits" movies={comedyQuery.data} to="/movies" />
+      <MovieRow title="Animation & Family" movies={animationQuery.data} to="/movies" />
+      <MovieRow title="Sci-Fi & Fantasy" movies={sciFiQuery.data} to="/movies" />
+      <MovieRow title="Horror & Mystery" movies={horrorQuery.data} to="/movies" />
+      <MovieRow title="Drama Hits" movies={dramaQuery.data} to="/movies" />
+      <MovieRow title="Romantic Movies" movies={romanceQuery.data} to="/movies" />
+      <MovieRow title="Thrillers" movies={thrillerQuery.data} to="/movies" />
+      <MovieRow title="Adventure & Exploration" movies={adventureQuery.data} to="/movies" />
     </div>
   );
 }
 
 export default DiscoverSections;
+

@@ -27,12 +27,13 @@ function MovieCard({ movie, btn }: MovieCardProps) {
       <Link className="cursor-pointer flex flex-col w-full"
         to={`/movie/${movie.id}`}
       >
-        <div className="relative aspect-[2/3] w-full rounded-xl overflow-hidden mb-2 bg-[#12131f]">
-          <img className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-            src={posterUrl}
-            alt={movie.title}
-            loading="lazy"
-          />
+        <div className="relative aspect-[2/3] w-full rounded-xl overflow-hidden mb-2 bg-[#12131f] flex items-center justify-center">
+            <img className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+              src={posterUrl}
+              alt={movie.title}
+              loading="lazy"
+            />
+
 
           <div className="absolute top-2 left-2 flex items-center gap-1 bg-black px-2 py-0.5 rounded-md text-xs font-bold text-white">
             <Star className="w-3 h-3 fill-amber-400 text-amber-400" />

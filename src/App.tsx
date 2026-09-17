@@ -1,5 +1,6 @@
 import { Routes, Route } from 'react-router-dom'
 import DiscoverPage from './pages/discover/DiscoverPage'
+import MoviesPage from './pages/movies/MoviesPage'
 import SearchPage from './pages/search/SearchPage'
 import MovieDetailsPage from './pages/movieDetails/MovieDetailsPage'
 import WatchlistPage from './pages/watchlist/WatchlistPage'
@@ -15,6 +16,7 @@ function App() {
       <Route path="/" element={<Layout />}>
         <Route index element={<DiscoverPage />} />
         <Route path="discover" element={<DiscoverPage />} />
+        <Route path="movies" element={<MoviesPage />} />
         <Route path="search" element={<SearchPage />} />
         <Route path="movie/:id" element={<MovieDetailsPage />} />
         <Route path="watchlist" element={<WatchlistPage />} />
