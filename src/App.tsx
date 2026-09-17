@@ -8,24 +8,27 @@ import WatchedPage from './pages/watched/WatchedPage'
 import FavoritesPage from './pages/favorites/FavoritesPage'
 import LibraryPage from './pages/library/LibraryPage'
 import NotFoundPage from './pages/notFound/NotFoundPage'
+import ScrollToTop from './components/layout/ScrollToTop'
 import Layout from './components/layout/Layout'
 
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<Layout />}>
-        <Route index element={<DiscoverPage />} />
-        <Route path="discover" element={<DiscoverPage />} />
-        <Route path="movies" element={<MoviesPage />} />
-        <Route path="search" element={<SearchPage />} />
-        <Route path="movie/:id" element={<MovieDetailsPage />} />
-        <Route path="watchlist" element={<WatchlistPage />} />
-        <Route path="watched" element={<WatchedPage />} />
-        <Route path="favorites" element={<FavoritesPage />} />
-        <Route path="library" element={<LibraryPage />} />
-        <Route path="*" element={<NotFoundPage />} />
-      </Route>
-    </Routes>
+    <ScrollToTop>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<DiscoverPage />} />
+          <Route path="discover" element={<DiscoverPage />} />
+          <Route path="movies" element={<MoviesPage />} />
+          <Route path="search" element={<SearchPage />} />
+          <Route path="movie/:id" element={<MovieDetailsPage />} />
+          <Route path="watchlist" element={<WatchlistPage />} />
+          <Route path="watched" element={<WatchedPage />} />
+          <Route path="favorites" element={<FavoritesPage />} />
+          <Route path="library" element={<LibraryPage />} />
+          <Route path="*" element={<NotFoundPage />} />
+        </Route>
+      </Routes>
+    </ScrollToTop>
   )
 }
 
