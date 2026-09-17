@@ -11,9 +11,7 @@ function NoResults({ query }: NoResultsProps) {
         <SearchX className="w-8 h-8 text-blue-500" />
       </div>
 
-      <h2 className="text-xl font-bold text-white mb-2">
-        No movies found
-      </h2>
+      <h2 className="text-xl font-bold text-white mb-2">No movies found</h2>
 
       <p className="text-sm text-slate-400 max-w-sm">
         {query
@@ -25,4 +23,3 @@ function NoResults({ query }: NoResultsProps) {
 }
 
 export default NoResults;
-

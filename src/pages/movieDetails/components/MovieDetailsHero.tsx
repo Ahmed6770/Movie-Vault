@@ -1,5 +1,6 @@
-import { Star, Plus, Heart, Play } from "lucide-react";
-
+import { Star, Plus, Heart, Play, Check } from "lucide-react";
+import { useContext } from "react";
+import { LibraryContext } from "../../../context/LibraryContext";
 type MovieDetailsHeroProps = {
   id: number;
   title: string;
@@ -12,15 +13,18 @@ type MovieDetailsHeroProps = {
   genres?: { id: number; name: string }[];
 };
 
-function MovieDetailsHero({
-  movieDetails,
-}: {
-  movieDetails: MovieDetailsHeroProps;
-}) {
+function MovieDetailsHero({ movieDetails }: { movieDetails: MovieDetailsHeroProps }) {
+  const { watchlist, watched, favorites, handleWatchlist, handleWatched, handleFavorites } = useContext(LibraryContext);
+
   if (!movieDetails) return null;
+
+  const isWatchlist = watchlist?.some((item: { id: number }) => item.id === movieDetails.id);
+  const isWatched = watched?.some((item: { id: number }) => item.id === movieDetails.id);
+  const isFavorites = favorites?.some((item: { id: number }) => item.id === movieDetails.id);
 
   return (
     <div className="relative w-full md:min-h-[500px] flex flex-col md:justify-center">
+      {/* Backdrop poster */}
       <div className="hidden md:block absolute inset-0 overflow-hidden">
         <img className="w-full h-full object-cover object-top"
           src={`https://image.tmdb.org/t/p/original${movieDetails.backdrop_path || movieDetails.poster_path}`}
@@ -30,7 +34,7 @@ function MovieDetailsHero({
         <div className="absolute inset-0 bg-gradient-to-t from-[#090a10] to-transparent" />
       </div>
 
-      {/* Mobile poster*/}
+      {/* Mobile poster */}
       <div className="md:hidden relative -mx-4 h-64 sm:h-72 overflow-hidden mb-4">
         <img className="w-full h-full object-cover object-top"
           src={`https://image.tmdb.org/t/p/original${movieDetails.backdrop_path || movieDetails.poster_path}`}
@@ -38,7 +42,8 @@ function MovieDetailsHero({
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#090a10] to-transparent" />
       </div>
-      {/* Details */}
+
+      {/* Movie Info */}
       <div className="relative z-10 max-w-2xl space-y-3.5 md:space-y-4">
         <h1 className="text-2xl md:text-5xl font-bold text-white">
           {movieDetails.title}
@@ -71,28 +76,48 @@ function MovieDetailsHero({
           {movieDetails.overview}
         </p>
 
-        {/* Btns */}
+        {/* Buttons */}
         <div className="flex flex-col md:flex-row gap-3 pt-2">
-          <button className="cursor-pointer w-full md:w-auto flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700
-            text-white px-7 py-3 rounded-xl text-sm font-semibold transition-colors"
+          {/* Add to Watchlist btn */}
+          <button
+            className="cursor-pointer w-full md:w-auto flex items-center justify-center gap-2 bg-blue-600
+              hover:bg-blue-700 text-white px-7 py-3 rounded-xl text-sm font-semibold transition-colors"
+            onClick={() => handleWatchlist(movieDetails)}
           >
-            <Play className="w-4 h-4 fill-white" />
-            <span>Add to Watchlist</span>
+            {isWatchlist ? (
+              <Check className="w-4 h-4" />
+            ) : (
+              <Play className="w-4 h-4 fill-white" />
+            )}
+            <span>
+              {isWatchlist ? "Added to Watchlist" : "Add to Watchlist"}
+            </span>
           </button>
 
+          {/* Mark as Watched btn */}
           <div className="grid grid-cols-2 md:flex gap-3 w-full md:w-auto">
-            <button className="cursor-pointer flex items-center justify-center gap-2 bg-slate-900 hover:bg-slate-800 border
-              border-slate-800 text-slate-200 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-medium transition-colors"
+            <button className="cursor-pointer flex items-center justify-center gap-2 bg-slate-900 hover:bg-slate-800
+              border border-slate-800 text-slate-200 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-medium transition-colors"
+              onClick={() => handleWatched(movieDetails)}
             >
-              <Plus className="w-4 h-4" />
-              <span>Mark as Watched</span>
+              {isWatched ? (
+                <Check className="w-4 h-4" />
+              ) : (
+                <Plus className="w-4 h-4" />
+              )}
+              <span>{isWatched ? "Added to Watched" : "Mark as Watched"}</span>
             </button>
 
-            <button className="cursor-pointer flex items-center justify-center gap-2 bg-slate-900 hover:bg-slate-800 border
-              border-slate-800 text-slate-200 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-medium transition-colors"
+            {/* Add to Favorite btn */}
+            <button className="cursor-pointer flex items-center justify-center gap-2 bg-slate-900 hover:bg-slate-800
+              border border-slate-800 text-slate-200 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-medium transition-colors"
+              onClick={() => handleFavorites(movieDetails)}
             >
-              <Heart className="w-4 h-4" />
-              <span>Add to Favorite</span>
+              <Heart className={`w-4 h-4 ${isFavorites ? "fill-red-500 text-red-500" : ""}`}
+              />
+              <span>
+                {isFavorites ? "Added to Favorites" : "Add to Favorites"}
+              </span>
             </button>
           </div>
         </div>

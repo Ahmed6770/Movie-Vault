@@ -11,7 +11,9 @@ function DiscoverHero() {
   return (
     <div className="px-4 md:px-8">
       {/* Hero Banner */}
-      <section className="relative w-full h-[420px] md:h-[600px] rounded-2xl md:rounded-3xl overflow-hidden border border-slate-800 mt-4 md:mt-6 mb-8 md:mb-10">
+      <section className="relative w-full h-[420px] md:h-[600px] rounded-2xl md:rounded-3xl
+        overflow-hidden border border-slate-800 mt-4 md:mt-6 mb-8 md:mb-10"
+      >
         <img className="w-full h-full object-cover object-top"
           src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
           alt={movie.title}
@@ -32,7 +34,8 @@ function DiscoverHero() {
             {movie.overview}
           </p>
 
-          <NavLink className="bg-blue-600 hover:bg-blue-700 text-white font-medium text-xs md:text-sm px-5 md:px-6 py-2.5 md:py-3 rounded-xl shadow-lg transition-colors"
+          <NavLink className="bg-blue-600 hover:bg-blue-700 text-white font-medium text-xs md:text-sm px-5
+              md:px-6 py-2.5 md:py-3 rounded-xl shadow-lg transition-colors"
             to={`/movie/${movie.id}`}
           >
             Watch Details
