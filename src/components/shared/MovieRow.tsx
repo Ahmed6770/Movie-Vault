@@ -11,6 +11,9 @@ type MovieRowProps = {
 };
 
 function MovieRow({ title, movies, to, btn }: MovieRowProps) {
+  const validMovies = movies?.filter((movie: any) => movie.poster_path);
+  if (!validMovies || validMovies.length === 0) return null;
+
   return (
     <section className="mb-10">
       {/* Header */}
@@ -40,7 +43,7 @@ function MovieRow({ title, movies, to, btn }: MovieRowProps) {
           1024: { slidesPerView: 6, spaceBetween: 16 },
         }}
       >
-        {movies?.map((movie: any) => (
+        {validMovies.map((movie: any) => (
           <SwiperSlide key={movie.id}>
             <MovieCard movie={movie} btn={btn ? btn(movie) : null} />
           </SwiperSlide>

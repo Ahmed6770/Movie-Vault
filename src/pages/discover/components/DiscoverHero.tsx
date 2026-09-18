@@ -1,12 +1,14 @@
 import { NavLink } from "react-router-dom";
 import { useMovies } from "../../../hooks/useMovies";
-import { getTrending } from "../../../services/api";
+import { getTrendingAll } from "../../../services/api";
 
 function DiscoverHero() {
-  /* Fetch trending movie data */
-  const query = useMovies("trending", getTrending);
+  /* Fetch trending movie & TV data */
+  const query = useMovies("trendingAll", getTrendingAll);
   if (!query.data) return null;
   const movie = (query.data as any)[0];
+  const isTV = Boolean(movie.name || movie.first_air_date );
+  const title = movie.title || movie.name;
 
   return (
     <div className="px-4 md:px-8">
@@ -16,7 +18,7 @@ function DiscoverHero() {
       >
         <img className="w-full h-full object-cover object-top"
           src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
-          alt={movie.title}
+          alt={title}
         />
 
         {/* Gradient overlay */}
@@ -28,7 +30,7 @@ function DiscoverHero() {
             #1 TRENDING NOW
           </span>
           <h1 className="text-2xl md:text-5xl font-extrabold text-white mb-3 line-clamp-2">
-            {movie.title}
+            {title}
           </h1>
           <p className="text-xs md:text-base text-slate-300 mb-4 md:mb-6 line-clamp-2 md:line-clamp-3">
             {movie.overview}
@@ -36,7 +38,7 @@ function DiscoverHero() {
 
           <NavLink className="bg-blue-600 hover:bg-blue-700 text-white font-medium text-xs md:text-sm px-5
               md:px-6 py-2.5 md:py-3 rounded-xl shadow-lg transition-colors"
-            to={`/movie/${movie.id}`}
+            to={isTV ? `/tv/${movie.id}` : `/movie/${movie.id}`}
           >
             Watch Details
           </NavLink>

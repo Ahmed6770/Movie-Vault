@@ -1,34 +1,35 @@
 import { Star, Plus, Heart, Play, Check } from "lucide-react";
 import { useContext } from "react";
 import { LibraryContext } from "../../../context/LibraryContext";
-type MovieDetailsHeroProps = {
+
+type TVDetailsHeroProps = {
   id: number;
-  title: string;
+  name: string;
   poster_path: string;
   backdrop_path: string;
   vote_average?: number;
-  release_date: string;
-  runtime?: number;
+  first_air_date: string;
+  number_of_seasons?: number;
   overview: string;
   genres?: { id: number; name: string }[];
 };
 
-function MovieDetailsHero({ movieDetails }: { movieDetails: MovieDetailsHeroProps }) {
+function TVDetailsHero({ tvDetails }: { tvDetails: TVDetailsHeroProps }) {
   const { watchlist, watched, favorites, handleWatchlist, handleWatched, handleFavorites } = useContext(LibraryContext);
 
-  if (!movieDetails) return null;
+  if (!tvDetails) return null;
 
-  const isWatchlist = watchlist.some((item: { id: number }) => item.id === movieDetails.id);
-  const isWatched = watched.some((item: { id: number }) => item.id === movieDetails.id);
-  const isFavorites = favorites.some((item: { id: number }) => item.id === movieDetails.id);
+  const isWatchlist = watchlist.some((item: { id: number }) => item.id === tvDetails.id);
+  const isWatched = watched.some((item: { id: number }) => item.id === tvDetails.id);
+  const isFavorites = favorites.some((item: { id: number }) => item.id === tvDetails.id);
 
   return (
     <div className="relative w-full md:min-h-[500px] flex flex-col md:justify-center">
       {/* Backdrop poster */}
       <div className="hidden md:block absolute inset-0 overflow-hidden">
         <img className="w-full h-full object-cover object-top"
-          src={`https://image.tmdb.org/t/p/original${movieDetails.backdrop_path || movieDetails.poster_path}`}
-          alt={movieDetails.title}
+          src={`https://image.tmdb.org/t/p/original${tvDetails.backdrop_path || tvDetails.poster_path}`}
+          alt={tvDetails.name}
         />
         <div className="absolute inset-0 bg-gradient-to-r from-[#090a10] to-transparent" />
         <div className="absolute inset-0 bg-gradient-to-t from-[#090a10] to-transparent" />
@@ -37,8 +38,8 @@ function MovieDetailsHero({ movieDetails }: { movieDetails: MovieDetailsHeroProp
       {/* Mobile poster */}
       <div className="md:hidden relative -mx-4 h-64 sm:h-72 overflow-hidden mb-4">
         <img className="w-full h-full object-cover object-top"
-          src={`https://image.tmdb.org/t/p/original${movieDetails.backdrop_path || movieDetails.poster_path}`}
-          alt={movieDetails.title}
+          src={`https://image.tmdb.org/t/p/original${tvDetails.backdrop_path || tvDetails.poster_path}`}
+          alt={tvDetails.name}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#090a10] to-transparent" />
       </div>
@@ -46,24 +47,24 @@ function MovieDetailsHero({ movieDetails }: { movieDetails: MovieDetailsHeroProp
       {/* Movie Info */}
       <div className="relative z-10 max-w-2xl space-y-3.5 md:space-y-4">
         <h1 className="text-2xl md:text-5xl font-bold text-white">
-          {movieDetails.title}
+          {tvDetails.name}
         </h1>
 
         <div className="flex items-center gap-2.5 text-xs md:text-sm text-slate-400 font-medium">
-          <span>{movieDetails.release_date.split("-")[0]}</span>
+          <span>{tvDetails.first_air_date ? tvDetails.first_air_date.split("-")[0] : ""}</span>
           <span>•</span>
-          <span>{movieDetails.runtime} min</span>
+          <span>{tvDetails.number_of_seasons} Seasons</span>
         </div>
 
         <div className="flex items-center gap-2">
           <Star className="w-4 h-4 fill-amber-400 text-amber-400" />
           <span className="font-bold text-white text-sm">
-            {movieDetails.vote_average ? movieDetails.vote_average.toFixed(1) : "0.0"}
+            {tvDetails.vote_average ? tvDetails.vote_average.toFixed(1) : "0.0"}
           </span>
         </div>
 
         <div className="flex flex-wrap gap-2">
-          {movieDetails.genres?.map((genre) => (
+          {tvDetails.genres?.map((genre) => (
             <span className="px-3 py-1 bg-slate-900 border border-slate-800 rounded-full text-xs text-slate-300"
               key={genre.id}
             >
@@ -73,7 +74,7 @@ function MovieDetailsHero({ movieDetails }: { movieDetails: MovieDetailsHeroProp
         </div>
 
         <p className="text-slate-300 text-xs md:text-sm max-w-xl">
-          {movieDetails.overview}
+          {tvDetails.overview}
         </p>
 
         {/* Buttons */}
@@ -82,7 +83,7 @@ function MovieDetailsHero({ movieDetails }: { movieDetails: MovieDetailsHeroProp
           <button
             className="cursor-pointer w-full md:w-auto flex items-center justify-center gap-2 bg-blue-600
               hover:bg-blue-700 text-white px-7 py-3 rounded-xl text-sm font-semibold transition-colors"
-            onClick={() => handleWatchlist(movieDetails)}
+            onClick={() => handleWatchlist(tvDetails as any)}
           >
             {isWatchlist ? (
               <Check className="w-4 h-4" />
@@ -98,7 +99,7 @@ function MovieDetailsHero({ movieDetails }: { movieDetails: MovieDetailsHeroProp
           <div className="grid grid-cols-2 md:flex gap-3 w-full md:w-auto">
             <button className="cursor-pointer flex items-center justify-center gap-2 bg-slate-900 hover:bg-slate-800
               border border-slate-800 text-slate-200 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-medium transition-colors"
-              onClick={() => handleWatched(movieDetails)}
+              onClick={() => handleWatched(tvDetails as any)}
             >
               {isWatched ? (
                 <Check className="w-4 h-4" />
@@ -111,7 +112,7 @@ function MovieDetailsHero({ movieDetails }: { movieDetails: MovieDetailsHeroProp
             {/* Add to Favorite btn */}
             <button className="cursor-pointer flex items-center justify-center gap-2 bg-slate-900 hover:bg-slate-800
               border border-slate-800 text-slate-200 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-medium transition-colors"
-              onClick={() => handleFavorites(movieDetails)}
+              onClick={() => handleFavorites(tvDetails as any)}
             >
               <Heart className={`w-4 h-4 ${isFavorites ? "fill-red-500 text-red-500" : ""}`}
               />
@@ -126,4 +127,4 @@ function MovieDetailsHero({ movieDetails }: { movieDetails: MovieDetailsHeroProp
   );
 }
 
-export default MovieDetailsHero;
+export default TVDetailsHero;

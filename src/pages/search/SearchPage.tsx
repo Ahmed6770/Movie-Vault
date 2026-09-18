@@ -9,15 +9,11 @@ function SearchPage() {
   const movies = result.data as any || [];
   
   if (result.isLoading) return null;
-  return (
-    <>
-    {movies.length > 0 ? (
-      <MoviesPage movies={movies} />
-    ) : (
-      <NoResults query={query} />
-    )}
-    </>
-  )
+  return movies.length > 0 ? (
+    <MoviesPage movies={movies} />
+  ) : (
+    <NoResults query={query} />
+  );
 }
 
 export default SearchPage;

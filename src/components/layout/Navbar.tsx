@@ -1,5 +1,5 @@
 import { NavLink, useNavigate } from "react-router-dom";
-import { Search, CircleUser, ChevronDown, Home, Library, Film } from "lucide-react";
+import { Search, CircleUser, ChevronDown, Home, Library, Film, Tv } from "lucide-react";
 import Logo from "../../assets/logo.png";
 import { useState } from "react";
 
@@ -17,6 +17,7 @@ function Navbar() {
   const navLinks = [
     { name: "Discover", to: "/discover", icon: Home },
     { name: "Movies", to: "/movies", icon: Film },
+    { name: "TV Shows", to: "/tv", icon: Tv },
     { name: "Search", to: "/search", icon: Search },
     { name: "My Library", to: "/library", icon: Library },
     { name: "Profile", to: "/profile", icon: CircleUser },
@@ -49,6 +50,9 @@ function Navbar() {
               <NavLink to="/movies" className={linkClass}>
                 Movies
               </NavLink>
+              <NavLink to="/tv" className={linkClass}>
+                TV Shows
+              </NavLink>
               <NavLink to="/library" className={linkClass}>
                 My Library
               </NavLink>
@@ -61,7 +65,7 @@ function Navbar() {
             <input className="w-full bg-[#12131f] text-xs md:text-sm text-slate-300 placeholder-slate-500
              pl-9 md:pl-10 pr-4 py-1.5 md:py-2 rounded-xl border border-slate-800 focus:outline-none focus:border-blue-500 transition-colors"
               type="text"
-              placeholder="Search movies..."
+              placeholder="Search movies & series..."
               value={searchValue}
               onChange={(e) => setSearchValue(e.target.value)}
               onKeyDown={(e) => handleEnter(e.key)}

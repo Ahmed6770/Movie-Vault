@@ -3,6 +3,8 @@ import DiscoverPage from './pages/discover/DiscoverPage'
 import MoviesPage from './pages/movies/MoviesPage'
 import SearchPage from './pages/search/SearchPage'
 import MovieDetailsPage from './pages/movieDetails/MovieDetailsPage'
+import TVPage from './pages/tv/TVPage'
+import TVDetailsPage from './pages/tvDetails/TVDetailsPage'
 import WatchlistPage from './pages/watchlist/WatchlistPage'
 import WatchedPage from './pages/watched/WatchedPage'
 import FavoritesPage from './pages/favorites/FavoritesPage'
@@ -19,8 +21,10 @@ function App() {
           <Route index element={<DiscoverPage />} />
           <Route path="discover" element={<DiscoverPage />} />
           <Route path="movies" element={<MoviesPage />} />
+          <Route path="tv" element={<TVPage />} />
           <Route path="search" element={<SearchPage />} />
           <Route path="movie/:id" element={<MovieDetailsPage />} />
+          <Route path="tv/:id" element={<TVDetailsPage />} />
           <Route path="watchlist" element={<WatchlistPage />} />
           <Route path="watched" element={<WatchedPage />} />
           <Route path="favorites" element={<FavoritesPage />} />

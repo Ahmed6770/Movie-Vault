@@ -141,10 +141,116 @@ export async function getSimilarMovies(id: string) {
 /* Fetch search */
 export async function searchMovies(text: string){
   if (!text) return []; 
-  const response = await api.get("/search/movie", {
+  const response = await api.get("/search/multi", {
     params: {
       query: text
     }
-  })
+  });
+  return response.data.results.filter((item: any) => item.media_type !== "person");
+}
+
+/* Fetch trending movies & series */
+export async function getTrendingAll(page: number = 1) {
+  const response = await api.get("/trending/all/day", {
+    params: { page },
+  });
+  return response.data.results.filter((item: any) => item.media_type !== "person");
+}
+
+/////////////////////// series ////////////////////
+
+/* Fetch trending series */
+export async function getTrendingTV(page: number = 1) {
+  const response = await api.get("/trending/tv/day", {
+    params: { page },
+  });
+  return response.data.results;
+}
+
+/* Fetch top rated series */
+export async function getTopRatedTV(page: number = 1) {
+  const response = await api.get("/tv/top_rated", {
+    params: { page },
+  });
+  return response.data.results;
+}
+
+/* Fetch popular series */
+export async function getPopularTV(page: number = 1) {
+  const response = await api.get("/tv/popular", {
+    params: { page },
+  });
+  return response.data.results;
+}
+
+/* Fetch animation series */
+export async function getTVAnimation(page: number = 1) {
+  const response = await api.get("/discover/tv", {
+    params: { with_genres: 16, page },
+  });
+  return response.data.results;
+}
+
+/* Fetch comedy series */
+export async function getTVComedy(page: number = 1) {
+  const response = await api.get("/discover/tv", {
+    params: { with_genres: 35, page },
+  });
+  return response.data.results;
+}
+
+/* Fetch crime series */
+export async function getTVCrime(page: number = 1) {
+  const response = await api.get("/discover/tv", {
+    params: { with_genres: 80, page },
+  });
+  return response.data.results;
+}
+
+/* Fetch drama series */
+export async function getTVDrama(page: number = 1) {
+  const response = await api.get("/discover/tv", {
+    params: { with_genres: 18, page },
+  });
+  return response.data.results;
+}
+
+/* Fetch sci-fi series */
+export async function getTVSciFi(page: number = 1) {
+  const response = await api.get("/discover/tv", {
+    params: { with_genres: 10765, page },
+  });
+  return response.data.results;
+}
+
+/* Fetch action series */
+export async function getTVAction(page: number = 1) {
+  const response = await api.get("/discover/tv", {
+    params: { with_genres: 10759, page },
+  });
+  return response.data.results;
+}
+
+/* Fetch mystery series */
+export async function getTVMystery(page: number = 1) {
+  const response = await api.get("/discover/tv", {
+    params: { with_genres: 9648, page },
+  });
+  return response.data.results;
+}
+
+/* Fetch TV details */
+export async function getTVDetails(id: string) {
+  const response = await api.get(`/tv/${id}`, {
+    params: {
+      append_to_response: "credits,videos,watch/providers",
+    },
+  });
+  return response.data;
+}
+
+/* Fetch similar series */
+export async function getSimilarTV(id: string) {
+  const response = await api.get(`/tv/${id}/similar`);
   return response.data.results;
 }

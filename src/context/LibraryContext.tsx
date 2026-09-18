@@ -4,13 +4,16 @@ export const LibraryContext = createContext<any>(null);
 type movie = {
   id: number;
   title: string;
+  name: string;
   poster_path: string;
-  backdrop_path: string;
+  backdrop_path?: string;
   vote_average?: number;
-  release_date: string;
+  release_date?: string;
+  first_air_date?: string;
   runtime?: number;
   overview: string;
   genres?: { id: number; name: string }[];
+  media_type?: string;
 };
 
 function LibrayProvider({ children }: { children: React.ReactNode }) {
