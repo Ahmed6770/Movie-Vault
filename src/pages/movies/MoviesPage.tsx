@@ -1,3 +1,4 @@
+import type { Movie } from "../../types/movie";
 import { useState, useEffect } from "react";
 import SharedMoviesPage from "../../components/shared/MoviesPage";
 import { useMovies } from "../../hooks/useMovies";
@@ -21,7 +22,7 @@ import {
 } from "../../services/api";
 
 /* Movie categories & functions */
-const api: any = {
+const api: Record<string, (page: number) => Promise<Movie[]>> = {
   Popular: getPopular,
   Trending: getTrending,
   "Top Rated": getTopRated,
@@ -43,10 +44,10 @@ function MoviesPage() {
   const [page, setPage] = useState(1);
 
   /* Fetch movies by category and page */
-  const query = useMovies(`movies-${selected}-${page}`, () =>
+  const query = useMovies<Movie[]>(`movies-${selected}-${page}`, () =>
     api[selected](page),
   );
-  const movies = (query.data as any) || [];
+  const movies = query.data || [];
 
   /* Scroll to top on page or category change */
   useEffect(() => {

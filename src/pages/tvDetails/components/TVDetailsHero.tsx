@@ -1,27 +1,20 @@
 import { Star, Plus, Heart, Play, Check } from "lucide-react";
 import { useContext } from "react";
 import { LibraryContext } from "../../../context/LibraryContext";
+import type { Movie } from "../../../types/movie";
 
 type TVDetailsHeroProps = {
-  id: number;
-  name: string;
-  poster_path: string;
-  backdrop_path: string;
-  vote_average?: number;
-  first_air_date: string;
-  number_of_seasons?: number;
-  overview: string;
-  genres?: { id: number; name: string }[];
+  tvDetails: Movie;
 };
 
-function TVDetailsHero({ tvDetails }: { tvDetails: TVDetailsHeroProps }) {
-  const { watchlist, watched, favorites, handleWatchlist, handleWatched, handleFavorites } = useContext(LibraryContext);
+function TVDetailsHero({ tvDetails }: TVDetailsHeroProps) {
+  const { watchlist, watched, favorites, handleWatchlist, handleWatched, handleFavorites } = useContext(LibraryContext)!;
 
   if (!tvDetails) return null;
 
-  const isWatchlist = watchlist.some((item: { id: number }) => item.id === tvDetails.id);
-  const isWatched = watched.some((item: { id: number }) => item.id === tvDetails.id);
-  const isFavorites = favorites.some((item: { id: number }) => item.id === tvDetails.id);
+  const isWatchlist = watchlist.some((item) => item.id === tvDetails.id);
+  const isWatched = watched.some((item) => item.id === tvDetails.id);
+  const isFavorites = favorites.some((item) => item.id === tvDetails.id);
 
   return (
     <div className="relative w-full md:min-h-[500px] flex flex-col md:justify-center">
@@ -83,7 +76,7 @@ function TVDetailsHero({ tvDetails }: { tvDetails: TVDetailsHeroProps }) {
           <button
             className="cursor-pointer w-full md:w-auto flex items-center justify-center gap-2 bg-blue-600
               hover:bg-blue-700 text-white px-7 py-3 rounded-xl text-sm font-semibold transition-colors"
-            onClick={() => handleWatchlist(tvDetails as any)}
+            onClick={() => handleWatchlist(tvDetails)}
           >
             {isWatchlist ? (
               <Check className="w-4 h-4" />
@@ -99,7 +92,7 @@ function TVDetailsHero({ tvDetails }: { tvDetails: TVDetailsHeroProps }) {
           <div className="grid grid-cols-2 md:flex gap-3 w-full md:w-auto">
             <button className="cursor-pointer flex items-center justify-center gap-2 bg-slate-900 hover:bg-slate-800
               border border-slate-800 text-slate-200 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-medium transition-colors"
-              onClick={() => handleWatched(tvDetails as any)}
+              onClick={() => handleWatched(tvDetails)}
             >
               {isWatched ? (
                 <Check className="w-4 h-4" />
@@ -112,7 +105,7 @@ function TVDetailsHero({ tvDetails }: { tvDetails: TVDetailsHeroProps }) {
             {/* Add to Favorite btn */}
             <button className="cursor-pointer flex items-center justify-center gap-2 bg-slate-900 hover:bg-slate-800
               border border-slate-800 text-slate-200 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-medium transition-colors"
-              onClick={() => handleFavorites(tvDetails as any)}
+              onClick={() => handleFavorites(tvDetails)}
             >
               <Heart className={`w-4 h-4 ${isFavorites ? "fill-red-500 text-red-500" : ""}`}
               />

@@ -1,3 +1,4 @@
+import type { Movie } from "../types/movie";
 import axios from "axios";
 
 // base config
@@ -146,7 +147,7 @@ export async function searchMovies(text: string){
       query: text
     }
   });
-  return response.data.results.filter((item: any) => item.media_type !== "person");
+  return response.data.results.filter((item: Movie) => item.media_type !== "person");
 }
 
 /* Fetch trending movies & series */
@@ -154,7 +155,7 @@ export async function getTrendingAll(page: number = 1) {
   const response = await api.get("/trending/all/day", {
     params: { page },
   });
-  return response.data.results.filter((item: any) => item.media_type !== "person");
+  return response.data.results.filter((item: Movie) => item.media_type !== "person");
 }
 
 /////////////////////// series ////////////////////

@@ -1,26 +1,20 @@
+import type { Movie } from "../../../types/movie";
 import { Star, Plus, Heart, Play, Check } from "lucide-react";
 import { useContext } from "react";
 import { LibraryContext } from "../../../context/LibraryContext";
+
 type MovieDetailsHeroProps = {
-  id: number;
-  title: string;
-  poster_path: string;
-  backdrop_path: string;
-  vote_average?: number;
-  release_date: string;
-  runtime?: number;
-  overview: string;
-  genres?: { id: number; name: string }[];
+  movieDetails: Movie;
 };
 
-function MovieDetailsHero({ movieDetails }: { movieDetails: MovieDetailsHeroProps }) {
-  const { watchlist, watched, favorites, handleWatchlist, handleWatched, handleFavorites } = useContext(LibraryContext);
+function MovieDetailsHero({ movieDetails }: MovieDetailsHeroProps) {
+  const { watchlist, watched, favorites, handleWatchlist, handleWatched, handleFavorites } = useContext(LibraryContext)!;
 
   if (!movieDetails) return null;
 
-  const isWatchlist = watchlist.some((item: { id: number }) => item.id === movieDetails.id);
-  const isWatched = watched.some((item: { id: number }) => item.id === movieDetails.id);
-  const isFavorites = favorites.some((item: { id: number }) => item.id === movieDetails.id);
+  const isWatchlist = watchlist.some((item) => item.id === movieDetails.id);
+  const isWatched = watched.some((item) => item.id === movieDetails.id);
+  const isFavorites = favorites.some((item) => item.id === movieDetails.id);
 
   return (
     <div className="relative w-full md:min-h-[500px] flex flex-col md:justify-center">
@@ -50,7 +44,7 @@ function MovieDetailsHero({ movieDetails }: { movieDetails: MovieDetailsHeroProp
         </h1>
 
         <div className="flex items-center gap-2.5 text-xs md:text-sm text-slate-400 font-medium">
-          <span>{movieDetails.release_date.split("-")[0]}</span>
+          <span>{movieDetails.release_date?.split("-")[0]}</span>
           <span>•</span>
           <span>{movieDetails.runtime} min</span>
         </div>

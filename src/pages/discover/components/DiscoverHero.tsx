@@ -1,12 +1,13 @@
+import type { Movie } from "../../../types/movie";
 import { NavLink } from "react-router-dom";
 import { useMovies } from "../../../hooks/useMovies";
 import { getTrendingAll } from "../../../services/api";
 
 function DiscoverHero() {
   /* Fetch trending movie & TV data */
-  const query = useMovies("trendingAll", getTrendingAll);
+  const query = useMovies<Movie[]>("trendingAll", getTrendingAll);
   if (!query.data) return null;
-  const movie = (query.data as any)[0];
+  const movie = query.data[0];
   const isTV = Boolean(movie.name || movie.first_air_date );
   const title = movie.title || movie.name;
 

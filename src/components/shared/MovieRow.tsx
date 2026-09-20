@@ -1,3 +1,4 @@
+import type { Movie } from "../../types/movie";
 import { Link } from "react-router-dom";
 import MovieCard from "./MovieCard";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -5,13 +6,13 @@ import "swiper/css";
 
 type MovieRowProps = {
   title: string;
-  movies: any;
+  movies?: Movie[];
   to?: string;
-  btn?: any;
+  btn?: (movie: Movie) => React.ReactNode;
 };
 
 function MovieRow({ title, movies, to, btn }: MovieRowProps) {
-  const validMovies = movies?.filter((movie: any) => movie.poster_path);
+  const validMovies = movies?.filter((movie) => movie.poster_path);
   if (!validMovies || validMovies.length === 0) return null;
 
   return (
@@ -43,7 +44,7 @@ function MovieRow({ title, movies, to, btn }: MovieRowProps) {
           1024: { slidesPerView: 6, spaceBetween: 16 },
         }}
       >
-        {validMovies.map((movie: any) => (
+        {validMovies.map((movie) => (
           <SwiperSlide key={movie.id}>
             <MovieCard movie={movie} btn={btn ? btn(movie) : null} />
           </SwiperSlide>

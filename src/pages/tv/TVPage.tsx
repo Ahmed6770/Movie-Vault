@@ -1,3 +1,4 @@
+import type { Movie } from "../../types/movie";
 import { useState, useEffect } from "react";
 import SharedMoviesPage from "../../components/shared/MoviesPage";
 import { useMovies } from "../../hooks/useMovies";
@@ -17,7 +18,7 @@ import {
 } from "../../services/api";
 
 /* TV categories & functions */
-const api: any = {
+const api: Record<string, (page: number) => Promise<Movie[]>> = {
   Popular: getPopularTV,
   Trending: getTrendingTV,
   "Top Rated": getTopRatedTV,
@@ -35,10 +36,10 @@ function TVPage() {
   const [page, setPage] = useState(1);
 
   /* Fetch TV shows by category and page */
-  const query = useMovies(`tv-${selected}-${page}`, () =>
+  const query = useMovies<Movie[]>(`tv-${selected}-${page}`, () =>
     api[selected](page),
   );
-  const shows = (query.data as any) || [];
+  const shows = query.data || [];
 
   /* Scroll to top on page or category change */
   useEffect(() => {

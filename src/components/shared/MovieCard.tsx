@@ -1,3 +1,4 @@
+import type { Movie } from "../../types/movie";
 import { Star, Heart } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
@@ -5,31 +6,24 @@ import { LibraryContext } from "../../context/LibraryContext";
 import NoPoster from "../../assets/no-poster.png";
 
 type MovieCardProps = {
-  movie: {
-    id: number;
-    title?: string;
-    name?: string;
-    poster_path: string;
-    vote_average?: number;
-    release_date?: string;
-    first_air_date?: string;
-    media_type?: string;
-  };
-  btn?: any;
+  movie: Movie;
+  btn?: React.ReactNode;
 };
 
 function MovieCard({ movie, btn }: MovieCardProps) {
-  const { favorites, handleFavorites } = useContext(LibraryContext);
-  const isFavorite = favorites.some((item: { id: number }) => item.id === movie.id);
+  const { favorites, handleFavorites } = useContext(LibraryContext)!;
+  const isFavorite = favorites.some((item) => item.id === movie.id);
 
-  const isTV = Boolean(movie.name || movie.first_air_date || movie.media_type === "tv");
+  const isTV = movie.media_type === "tv" || Boolean(movie.name);
   const title = movie.title || movie.name;
   const date = movie.release_date || movie.first_air_date;
+
   const posterUrl = movie.poster_path
     ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
     : NoPoster;
-  const rating = movie.vote_average ? movie.vote_average.toFixed(1) : "0.0";
-  const year = date ? date.split("-")[0] : "";
+
+  const rating = movie.vote_average?.toFixed(1) ?? "0.0";
+  const year = date?.split("-")[0] ?? "";
 
   return (
     <div className="group relative flex flex-col w-full">

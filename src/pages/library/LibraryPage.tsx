@@ -6,7 +6,7 @@ import { LibraryContext } from "../../context/LibraryContext";
 import { Bookmark, Ticket } from "lucide-react";
 
 function LibraryPage() {
-  const { watched, watchlist, favorites, handleWatchlist, handleWatched } = useContext(LibraryContext);
+  const { watched, watchlist, favorites, handleWatchlist, handleWatched } = useContext(LibraryContext)!;
   const total = watched.length + watchlist.length + favorites.length;
 
   return (
@@ -26,7 +26,7 @@ function LibraryPage() {
             title="Upcoming to Watch"
             movies={watchlist}
             to="/watchlist"
-            btn={(movie: any) => (
+            btn={(movie) => (
               <button className="cursor-pointer absolute top-2 right-2 p-1.5 rounded-md bg-black text-slate-300 hover:text-amber-400 z-10"
                 onClick={() => handleWatchlist(movie)}
               >
@@ -38,7 +38,7 @@ function LibraryPage() {
             title="Recently Watched"
             movies={watched}
             to="/watched"
-            btn={(movie: any) => (
+            btn={(movie) => (
               <button className="cursor-pointer absolute top-2 right-2 p-1.5 rounded-md bg-black text-slate-300 hover:text-blue-400 z-10"
                 onClick={() => handleWatched(movie)}
               >

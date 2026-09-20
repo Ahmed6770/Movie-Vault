@@ -6,7 +6,7 @@ function SearchPage() {
   const [searchParams] = useSearchParams();
   const query = searchParams.get("query") || "";
   const result = useSearch(query);
-  const movies = result.data as any || [];
+  const movies = result.data || [];
   
   if (result.isLoading) return null;
   return movies.length > 0 ? (

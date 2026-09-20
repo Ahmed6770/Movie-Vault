@@ -7,7 +7,7 @@ import { LibraryContext } from "../../context/LibraryContext";
 import { Ticket } from "lucide-react";
 
 function WatchedPage() {
-  const { watched, handleWatched } = useContext(LibraryContext);
+  const { watched, handleWatched } = useContext(LibraryContext)!;
 
   return (
     <div>
@@ -23,7 +23,7 @@ function WatchedPage() {
           />
           <MoviesPage
             movies={watched}
-            btn={(movie: any) => (
+            btn={(movie) => (
               <button className="cursor-pointer absolute top-2 right-2 p-1.5 rounded-md bg-black text-slate-300 hover:text-blue-400 z-10"
                 onClick={() => handleWatched(movie)}
               >

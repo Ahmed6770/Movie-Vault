@@ -7,7 +7,7 @@ import { LibraryContext } from "../../context/LibraryContext";
 import { Bookmark } from "lucide-react";
 
 function WatchlistPage() {
-  const { watchlist, handleWatchlist } = useContext(LibraryContext);
+  const { watchlist, handleWatchlist } = useContext(LibraryContext)!;
 
   return (
     <div>
@@ -23,7 +23,7 @@ function WatchlistPage() {
           />
           <MoviesPage
             movies={watchlist}
-            btn={(movie: any) => (
+            btn={(movie) => (
               <button className="cursor-pointer absolute top-2 right-2 p-1.5 rounded-md bg-black text-slate-300 hover:text-amber-400 z-10"
                 onClick={() => handleWatchlist(movie)}
               >

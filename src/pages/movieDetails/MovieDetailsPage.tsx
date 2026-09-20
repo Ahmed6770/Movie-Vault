@@ -1,3 +1,4 @@
+import type { Movie } from "../../types/movie";
 import { useParams } from "react-router-dom";
 import { getMovieDetails, getSimilarMovies } from "../../services/api";
 import { useMovies } from "../../hooks/useMovies";
@@ -13,11 +14,11 @@ function MovieDetailsPage() {
   const query = useMovies(`movieDetails-${id}`, () =>
     getMovieDetails(id || ""),
   );
-  const similar = useMovies(`similar-${id}`, () =>
+  const similar = useMovies<Movie[]>(`similar-${id}`, () =>
     getSimilarMovies(id || ""),
   );
-  const movie = query.data as any;
-  const similarMovies = (similar.data as any) || [];
+  const movie = query.data;
+  const similarMovies = similar.data || [];
 
   if (!movie) return null;
 

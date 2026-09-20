@@ -1,30 +1,30 @@
 import { createContext, useEffect, useState } from "react";
 
-export const LibraryContext = createContext<any>(null);
-type movie = {
-  id: number;
-  title: string;
-  name: string;
-  poster_path: string;
-  backdrop_path?: string;
-  vote_average?: number;
-  release_date?: string;
-  first_air_date?: string;
-  runtime?: number;
-  overview: string;
-  genres?: { id: number; name: string }[];
-  media_type?: string;
+import type { Movie } from "../types/movie";
+
+type LibraryContextType = {
+  watchlist: Movie[];
+  setWatchlist: React.Dispatch<React.SetStateAction<Movie[]>>;
+  watched: Movie[];
+  setWatched: React.Dispatch<React.SetStateAction<Movie[]>>;
+  favorites: Movie[];
+  setFavorites: React.Dispatch<React.SetStateAction<Movie[]>>;
+  handleWatchlist: (movieDetails: Movie) => void;
+  handleWatched: (movieDetails: Movie) => void;
+  handleFavorites: (movieDetails: Movie) => void;
 };
+
+export const LibraryContext = createContext<LibraryContextType | null>(null);
 
 function LibrayProvider({ children }: { children: React.ReactNode }) {
   // Localstorage with states
-  const [watchlist, setWatchlist] = useState<movie[]>(() =>
+  const [watchlist, setWatchlist] = useState<Movie[]>(() =>
     JSON.parse(localStorage.getItem("watchlist") || "[]"),
   );
-  const [watched, setWatched] = useState<movie[]>(() =>
+  const [watched, setWatched] = useState<Movie[]>(() =>
     JSON.parse(localStorage.getItem("watched") || "[]"),
   );
-  const [favorites, setFavorites] = useState<movie[]>(() =>
+  const [favorites, setFavorites] = useState<Movie[]>(() =>
     JSON.parse(localStorage.getItem("favorites") || "[]"),
   );
 
@@ -35,7 +35,7 @@ function LibrayProvider({ children }: { children: React.ReactNode }) {
   }, [watchlist, watched, favorites]);
 
   // Add to watchlist
-  function handleWatchlist(movieDetails: movie) {
+  function handleWatchlist(movieDetails: Movie) {
     const isAdded = watchlist.some((item) => item.id === movieDetails.id);
     if (isAdded) {
       setWatchlist(watchlist.filter((item) => item.id !== movieDetails.id));
@@ -47,7 +47,7 @@ function LibrayProvider({ children }: { children: React.ReactNode }) {
   }
 
   // Add to watched
-  function handleWatched(movieDetails: movie) {
+  function handleWatched(movieDetails: Movie) {
     const isAdded = watched.some((item) => item.id === movieDetails.id);
     if (isAdded) {
       setWatched(watched.filter((item) => item.id !== movieDetails.id));
@@ -59,7 +59,7 @@ function LibrayProvider({ children }: { children: React.ReactNode }) {
   }
 
   // Add to favorites
-  function handleFavorites(movieDetails: movie) {
+  function handleFavorites(movieDetails: Movie) {
     const isAdded = favorites.some((item) => item.id === movieDetails.id);
     if (isAdded) {
       setFavorites(favorites.filter((item) => item.id !== movieDetails.id));
@@ -69,10 +69,10 @@ function LibrayProvider({ children }: { children: React.ReactNode }) {
   }
 
   return (
-    <LibraryContext.Provider value={{watchlist, setWatchlist, watched, setWatched, favorites, setFavorites, handleWatchlist, handleWatched, handleFavorites }}>
-        {children}
+    <LibraryContext.Provider value={{ watchlist, setWatchlist, watched, setWatched, favorites, setFavorites, handleWatchlist, handleWatched, handleFavorites }}>
+      {children}
     </LibraryContext.Provider>
-  )
+  );
 }
 
 export default LibrayProvider;

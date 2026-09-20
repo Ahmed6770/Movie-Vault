@@ -6,7 +6,7 @@ import { useContext } from "react";
 import { LibraryContext } from "../../context/LibraryContext";
 
 function FavoritesPage() {
-  const { favorites } = useContext(LibraryContext);
+  const { favorites } = useContext(LibraryContext)!;
 
   return (
     <div>

@@ -1,15 +1,10 @@
+import type { Movie } from "../../../types/movie";
 import MovieCard from "../../../components/shared/MovieCard";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 
 type SimilarMoviesProps = {
-  movies: {
-    id: number;
-    title: string;
-    poster_path: string;
-    vote_average?: number;
-    release_date: string;
-  }[];
+  movies: Movie[];
 };
 
 function SimilarMovies({ movies }: SimilarMoviesProps) {
