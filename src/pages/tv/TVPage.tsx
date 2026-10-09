@@ -4,6 +4,7 @@ import SharedMoviesPage from "../../components/shared/MoviesPage";
 import { useMovies } from "../../hooks/useMovies";
 import TVHero from "./components/TVHero";
 import MoviesPagination from "../movies/components/MoviesPagination";
+import Loading from "../../components/shared/Loading";
 import {
   getPopularTV,
   getTrendingTV,
@@ -51,11 +52,13 @@ function TVPage() {
     setPage(1);
   }
 
+  if (query.isLoading) return <Loading />;
+
   return (
     <div>
       <TVHero selected={selected} onSelect={changeCategory} />
       <SharedMoviesPage movies={shows} />
-      <MoviesPagination page={page} onPageChange={setPage} />
+      <MoviesPagination page={page} onPageChange={setPage} hasNextPage={shows.length >= 20} />
     </div>
   );
 }

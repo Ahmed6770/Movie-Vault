@@ -12,6 +12,7 @@ import LibraryPage from './pages/library/LibraryPage'
 import NotFoundPage from './pages/notFound/NotFoundPage'
 import ScrollToTop from './components/layout/ScrollToTop'
 import Layout from './components/layout/Layout'
+import { Analytics } from '@vercel/analytics/react'
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>
+      <Analytics />
     </ScrollToTop>
   )
 }

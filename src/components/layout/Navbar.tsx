@@ -1,5 +1,5 @@
 import { NavLink, useNavigate } from "react-router-dom";
-import { Search, CircleUser, ChevronDown, Home, Library, Film, Tv } from "lucide-react";
+import { Search, Home, Library, Film, Tv } from "lucide-react";
 import Logo from "../../assets/logo.png";
 import { useState } from "react";
 
@@ -20,7 +20,6 @@ function Navbar() {
     { name: "TV Shows", to: "/tv", icon: Tv },
     { name: "Search", to: "/search", icon: Search },
     { name: "My Library", to: "/library", icon: Library },
-    { name: "Profile", to: "/profile", icon: CircleUser },
   ];
 
   const linkClass = ({ isActive }: { isActive: boolean }) =>
@@ -35,7 +34,7 @@ function Navbar() {
       <header className="w-full bg-[#090a10] border-b border-slate-800 text-white sticky top-0 z-40">
         <div className="flex items-center justify-between px-6 py-3 gap-6">
           {/* Logo & Links */}
-          <div className="flex items-center gap-8">
+          <div className="flex items-center gap-8 shrink-0">
             <NavLink to="/" className="flex items-center gap-2">
               <img src={Logo} alt="Movie Vault" className="h-8 w-auto" />
               <span className="font-bold text-lg text-slate-100">
@@ -60,23 +59,15 @@ function Navbar() {
           </div>
 
           {/* Search bar */}
-          <div className="relative flex-1 max-w-md mx-2 md:mx-6">
+          <div className="relative flex-1 max-w-md mx-auto">
             <Search className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500" />
-            <input className="w-full bg-[#12131f] text-xs md:text-sm text-slate-300 placeholder-slate-500
-             pl-9 md:pl-10 pr-4 py-1.5 md:py-2 rounded-xl border border-slate-800 focus:outline-none focus:border-blue-500 transition-colors"
+            <input className="w-full bg-[#12131f] text-xs md:text-sm text-slate-300 placeholder-slate-500 pl-9 md:pl-10 pr-4 py-1.5 md:py-2 rounded-xl border border-slate-800 focus:outline-none focus:border-blue-500 transition-colors"
               type="text"
               placeholder="Search movies & series..."
               value={searchValue}
               onChange={(e) => setSearchValue(e.target.value)}
               onKeyDown={(e) => handleEnter(e.key)}
             />
-          </div>
-
-          {/* Profile */}
-          <div className="hidden md:flex items-center gap-2 text-sm text-slate-300 cursor-pointer">
-            <CircleUser className="w-7 h-7 text-blue-500" />
-            <span className="font-medium text-slate-300">Ahmed</span>
-            <ChevronDown className="w-4 h-4 text-slate-500" />
           </div>
         </div>
       </header>

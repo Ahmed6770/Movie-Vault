@@ -25,7 +25,7 @@ function TVDetailsHero({ tvDetails }: TVDetailsHeroProps) {
           alt={tvDetails.name}
         />
         <div className="absolute inset-0 bg-gradient-to-r from-[#090a10] to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#090a10] to-transparent" />
+        <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-[#090a10] to-transparent" />
       </div>
 
       {/* Mobile poster */}
@@ -34,7 +34,7 @@ function TVDetailsHero({ tvDetails }: TVDetailsHeroProps) {
           src={`https://image.tmdb.org/t/p/original${tvDetails.backdrop_path || tvDetails.poster_path}`}
           alt={tvDetails.name}
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#090a10] to-transparent" />
+        <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-[#090a10] to-transparent" />
       </div>
 
       {/* Movie Info */}

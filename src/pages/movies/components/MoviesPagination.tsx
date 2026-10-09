@@ -5,9 +5,10 @@ const btnClass="flex items-center gap-1 px-4 py-2 text-sm font-medium bg-zinc-90
 type MoviesPaginationProps = {
   page: number;
   onPageChange: (newPage: number) => void;
+  hasNextPage?: boolean;
 };
 
-function MoviesPagination({ page, onPageChange }: MoviesPaginationProps) {
+function MoviesPagination({ page, onPageChange, hasNextPage = true }: MoviesPaginationProps) {
   return (
     <div className="flex items-center justify-center gap-4 py-10">
       <button className={btnClass}
@@ -19,13 +20,12 @@ function MoviesPagination({ page, onPageChange }: MoviesPaginationProps) {
       </button>
 
       <span className="text-sm font-medium text-slate-400">
-        Page <strong className="text-white">{page}
-        </strong> of <strong className="text-white">500</strong>
+        Page <strong className="text-white">{page}</strong>
       </span>
 
       <button className={btnClass}
         onClick={() => onPageChange(page + 1)}
-        disabled={page >= 500}
+        disabled={!hasNextPage}
       >
         Next
         <ChevronRight className="w-4 h-4" />

@@ -4,6 +4,7 @@ import SharedMoviesPage from "../../components/shared/MoviesPage";
 import { useMovies } from "../../hooks/useMovies";
 import MoviesHero from "./components/MoviesHero";
 import MoviesPagination from "./components/MoviesPagination";
+import Loading from "../../components/shared/Loading";
 import {
   getPopular,
   getTrending,
@@ -59,11 +60,13 @@ function MoviesPage() {
     setPage(1);
   }
 
+  if (query.isLoading) return <Loading />;
+
   return (
     <div>
       <MoviesHero selected={selected} onSelect={changeCategory} />
       <SharedMoviesPage movies={movies} />
-      <MoviesPagination page={page} onPageChange={setPage} />
+      <MoviesPagination page={page} onPageChange={setPage} hasNextPage={movies.length >= 20} />
     </div>
   );
 }

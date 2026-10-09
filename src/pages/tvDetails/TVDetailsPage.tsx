@@ -8,6 +8,7 @@ import MovieTrailer from "../movieDetails/components/MovieTrailer";
 import MovieCast from "../movieDetails/components/MovieCast";
 import WhereToWatch from "../movieDetails/components/WhereToWatch";
 import SimilarMovies from "../movieDetails/components/SimilarMovies";
+import Loading from "../../components/shared/Loading";
 
 function TVDetailsPage() {
   const { id } = useParams();
@@ -20,7 +21,7 @@ function TVDetailsPage() {
   const tv = query.data;
   const similarShows = similar.data || [];
 
-  if (!tv) return null;
+  if (!tv) return <Loading />;
 
   const watch = tv["watch/providers"]?.results?.US;
   const providers = watch?.flatrate || watch?.rent || watch?.buy;

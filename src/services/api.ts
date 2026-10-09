@@ -1,11 +1,9 @@
 import type { Movie } from "../types/movie";
 import axios from "axios";
-
 // base config
 export const api = axios.create({
-  baseURL: "https://api.themoviedb.org/3",
+  baseURL: `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/super-task`,
   params: {
-    api_key: import.meta.env.VITE_TMDB_API_KEY,
     include_adult: false,
     certification_country: "US",
     "certification.lte": "PG-13",
@@ -55,7 +53,7 @@ export async function getUpcoming(page: number = 1) {
 /* Fetch action movies */
 export async function getAction(page: number = 1) {
   const response = await api.get("/discover/movie", {
-    params: { with_genres: 28, page },
+    params: { with_genres: 28, sort_by: "vote_count.desc", page },
   });
   return response.data.results;
 }
@@ -63,7 +61,7 @@ export async function getAction(page: number = 1) {
 /* Fetch comedy movies */
 export async function getComedy(page: number = 1) {
   const response = await api.get("/discover/movie", {
-    params: { with_genres: 35, page },
+    params: { with_genres: 35, sort_by: "vote_count.desc", page },
   });
   return response.data.results;
 }
@@ -71,7 +69,7 @@ export async function getComedy(page: number = 1) {
 /* Fetch animation movies */
 export async function getAnimation(page: number = 1) {
   const response = await api.get("/discover/movie", {
-    params: { with_genres: 16, page },
+    params: { with_genres: 16, sort_by: "vote_count.desc", page },
   });
   return response.data.results;
 }
@@ -79,7 +77,7 @@ export async function getAnimation(page: number = 1) {
 /* Fetch sci-fi movies */
 export async function getSciFi(page: number = 1) {
   const response = await api.get("/discover/movie", {
-    params: { with_genres: 878, page },
+    params: { with_genres: 878, sort_by: "vote_count.desc", page },
   });
   return response.data.results;
 }
@@ -87,14 +85,14 @@ export async function getSciFi(page: number = 1) {
 /* Fetch horror movies */
 export async function getHorror(page: number = 1) {
   const response = await api.get("/discover/movie", {
-    params: { with_genres: 27, page },
+    params: { with_genres: 27, sort_by: "vote_count.desc", page },
   });
   return response.data.results;
 }
 /* Fetch drama movies */
 export async function getDrama(page: number = 1) {
   const response = await api.get("/discover/movie", {
-    params: { with_genres: 18, page },
+    params: { with_genres: 18, sort_by: "vote_count.desc", page },
   });
   return response.data.results;
 }
@@ -102,7 +100,7 @@ export async function getDrama(page: number = 1) {
 /* Fetch romance movies */
 export async function getRomance(page: number = 1) {
   const response = await api.get("/discover/movie", {
-    params: { with_genres: 10749, page },
+    params: { with_genres: 10749, sort_by: "vote_count.desc", page },
   });
   return response.data.results;
 }
@@ -110,7 +108,7 @@ export async function getRomance(page: number = 1) {
 /* Fetch thriller movies */
 export async function getThriller(page: number = 1) {
   const response = await api.get("/discover/movie", {
-    params: { with_genres: 53, page },
+    params: { with_genres: 53, sort_by: "vote_count.desc", page },
   });
   return response.data.results;
 }
@@ -118,7 +116,7 @@ export async function getThriller(page: number = 1) {
 /* Fetch adventure movies */
 export async function getAdventure(page: number = 1) {
   const response = await api.get("/discover/movie", {
-    params: { with_genres: 12, page },
+    params: { with_genres: 12, sort_by: "vote_count.desc", page },
   });
   return response.data.results;
 }
@@ -187,7 +185,7 @@ export async function getPopularTV(page: number = 1) {
 /* Fetch animation series */
 export async function getTVAnimation(page: number = 1) {
   const response = await api.get("/discover/tv", {
-    params: { with_genres: 16, page },
+    params: { with_genres: 16, sort_by: "vote_count.desc", page },
   });
   return response.data.results;
 }
@@ -195,7 +193,7 @@ export async function getTVAnimation(page: number = 1) {
 /* Fetch comedy series */
 export async function getTVComedy(page: number = 1) {
   const response = await api.get("/discover/tv", {
-    params: { with_genres: 35, page },
+    params: { with_genres: 35, sort_by: "vote_count.desc", page },
   });
   return response.data.results;
 }
@@ -203,7 +201,7 @@ export async function getTVComedy(page: number = 1) {
 /* Fetch crime series */
 export async function getTVCrime(page: number = 1) {
   const response = await api.get("/discover/tv", {
-    params: { with_genres: 80, page },
+    params: { with_genres: 80, sort_by: "vote_count.desc", page },
   });
   return response.data.results;
 }
@@ -211,7 +209,7 @@ export async function getTVCrime(page: number = 1) {
 /* Fetch drama series */
 export async function getTVDrama(page: number = 1) {
   const response = await api.get("/discover/tv", {
-    params: { with_genres: 18, page },
+    params: { with_genres: 18, sort_by: "vote_count.desc", page },
   });
   return response.data.results;
 }
@@ -219,7 +217,7 @@ export async function getTVDrama(page: number = 1) {
 /* Fetch sci-fi series */
 export async function getTVSciFi(page: number = 1) {
   const response = await api.get("/discover/tv", {
-    params: { with_genres: 10765, page },
+    params: { with_genres: 10765, sort_by: "vote_count.desc", page },
   });
   return response.data.results;
 }
@@ -227,7 +225,7 @@ export async function getTVSciFi(page: number = 1) {
 /* Fetch action series */
 export async function getTVAction(page: number = 1) {
   const response = await api.get("/discover/tv", {
-    params: { with_genres: 10759, page },
+    params: { with_genres: 10759, sort_by: "vote_count.desc", page },
   });
   return response.data.results;
 }
@@ -235,7 +233,7 @@ export async function getTVAction(page: number = 1) {
 /* Fetch mystery series */
 export async function getTVMystery(page: number = 1) {
   const response = await api.get("/discover/tv", {
-    params: { with_genres: 9648, page },
+    params: { with_genres: 9648, sort_by: "vote_count.desc", page },
   });
   return response.data.results;
 }
